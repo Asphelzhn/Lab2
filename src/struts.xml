@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.devMode" value="true" />
+   <package name="helloworld" extends="struts-default">     
+      <action name="add"
+      		class="action.Add"
+      		method="execute">
+      		<result name="success">/ok.jsp</result>
+      		<result name="ISBNerror" type = "chain" >turn2add</result>
+      		<result name="error">/HelloWorld.jsp</result>
+      </action>
+      <action name="addAuthor"
+      		class="action.Add"
+      		method="addAuthor">
+      		<result name="addAuthorSuccess" type = "chain">turn2add</result>
+      	</action>
+      <action name="search"
+      		class="action.Search"
+      		method="execute">
+      		<result name="success">/SearchResult.jsp</result>
+      		<result name="noAuthor">/index.jsp</result>
+      		<result name="tooMuchAuthor">/HelloWorld.jsp</result>
+      </action>
+      <action name="searchByBookName"
+      		class="action.Search"
+      		method="searchByBookName">
+      		<result name="success">/SearchResult.jsp</result>
+      		<result name="noBooks">/index2.jsp</result>
+      </action>
+      
+      <action name="turn2add"
+      		class="action.Turn2add"
+      		method="excute">
+      		<result name="success">/add.jsp</result>
+      </action>
+      <action name="delete"
+      		class="action.Delete"
+      		method="execute">
+            <result name="success" type = "chain">search</result>
+      </action>
+      
+      <action name="turn2edit"
+      		class="action.Edit"
+      		method="turn2edit">
+      		<result name="success">edit.jsp</result>
+      		
+      </action>
+            <action name="edit"
+      		class="action.Edit"
+      		method="edit">
+            <result name="success" type = "chain">search</result>
+      </action>
+      
+   </package>
+</struts>
